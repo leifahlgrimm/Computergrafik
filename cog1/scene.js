@@ -381,7 +381,6 @@ function(exports, dojo, domStyle, app, scenegraph, createScene, animation, raste
 
 		// Loop over polygons in model.
 		for(var p = 0; p < polygons.length; p++) {
-			polycount++;
 
 			// Prepare the data of polygon p to pass to scanline.
 			var polygon = polygons[p];
