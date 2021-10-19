@@ -272,7 +272,7 @@ function(exports, dojo, domStyle, app, scenegraph, createScene, animation, raste
 		// Otherwise we cannot display matrix information for it.
 		var foundInteractiveNode = false;
 
-		//console.log("scene.render() notes:" + nodes.length);
+		//console.log("scene.render() nodes:" + nodes.length);
 		// Loop over all nodes in the scene.
 		// Leave out nodes if they are not ready yet
 		// and report that.
@@ -381,6 +381,7 @@ function(exports, dojo, domStyle, app, scenegraph, createScene, animation, raste
 
 		// Loop over polygons in model.
 		for(var p = 0; p < polygons.length; p++) {
+			polycount++;
 
 			// Prepare the data of polygon p to pass to scanline.
 			var polygon = polygons[p];
