@@ -9,7 +9,7 @@
 define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 function(exports, shader, framebuffer, data) {
     "use strict";
-       
+
 	// Drawing context for canvas.
 	// Passed to initialize framebuffer.
 	// As raster uses the framebuffer to access the canvas ctx is for debug.
@@ -80,6 +80,8 @@ function(exports, shader, framebuffer, data) {
 	 */
 	function drawLineBresenham(startX, startY, startZ, endX, endY, endZ, color, storeIntersectionForScanlineFill, edgeStartVertexIndex, edgeEndVertexIndex, edgeStartTextureCoord, edgeEndTextureCoord) {
 
+		console.log(`startX: ${startX} startY: ${startY} startZ: ${startZ} - endX: ${endX} endY: ${endY} endZ: ${endZ}`);
+
 		// Let endX be larger than startX.
 		// In this way on a shared edge between polygons the same left most fragment
 		// is stored as intersection and the will never be a gap on a step of the edge.
@@ -129,35 +131,51 @@ function(exports, shader, framebuffer, data) {
 
 		// BEGIN exercise Bresenham
 		// Comment out the next two lines.
-		drawLine(startX, startY, endX, endY, color);
-		return;
+		//drawLine(startX, startY, endX, endY, color);
+		//return;
 
 		// Skip it, if the line is just a point.
-
+		if(startX == endX == startY == endY) {
+			framebuffer.set(startX, startY, startZ, color);
+			return;
+		}
 
 		// Optionally draw start point as is the same
 		// as the end point of the previous edge.
 		// In any case, do not add an intersection for start point here,
 		// this should happen later in the scanline function.
-
+		framebuffer.set(x, y, getZ(x, y), color);
 
 		// Distinction of cases for driving variable.
-
+		if(dXAbs >= dYAbs) {
 			// x is driving variable.
-
-						// Do not add intersections for points on horizontal line
-						// and not the end point, which is done in scanline.
-
-					//framebuffer.set(x, y, getZ(x, y), color);
-
+			e = dXAbs - dYAbs2;
+			while(x != endX) {
+				x = x + dXSign;
+				if(e > 0){
+					e = e - dYAbs2;
+				} else {
+					y += dYSign;
+					e += (dXAbs2 - dYAbs2);
+				}
+				framebuffer.set(x, y, getZ(x, y), color);
+			}
+		}
+		else {
 			// y is driving variable.
-
-					// Add every intersection as there can be only one per scan line.
-					// but not the end point, which is done in scanline.
-
-						//framebuffer.set(x, y, getZ(x, y), color);
-		
-		// END exercise Bresenham		
+			e = dYAbs - dXAbs2;
+			while(y != endY) {
+				y += dYSign;
+				if(e > 0) {
+					e = e - dXAbs2;
+				} else {
+					x += dXSign;
+					e += (dYAbs2 - dXAbs2);
+				}
+				framebuffer.set(x, y, getZ(x, y), color);
+			}
+		}
+		// END exercise Bresenham
 	};
 
 	/**
@@ -255,7 +273,7 @@ function(exports, shader, framebuffer, data) {
 
 			// If current derivative ==0 then keep the last one.
 
-		
+
 		// END exercise Scanline
 		// END exercise Texture
 
@@ -335,7 +353,7 @@ function(exports, shader, framebuffer, data) {
 
 				// Starting value on scanline.
 			}
-			
+
 		// END exercise Texture
 	}
 
@@ -355,7 +373,7 @@ function(exports, shader, framebuffer, data) {
 
 
 		// BEGIN exercise Shading
-		
+
 		// Step interpolation in shader.
 		interpolationData.shaderStepOnScanline();
 
@@ -420,10 +438,10 @@ function(exports, shader, framebuffer, data) {
 			// if ((line.length < 2) || (line.length % 2)) {
 			// console.log("Error in number of intersection (" + line.length + ") in line: " + y);
 			// }
-			
+
 			// Order intersection in scanline.
 
-			
+
 			// Loop over intersections in pairs of two.
 
 
@@ -439,7 +457,7 @@ function(exports, shader, framebuffer, data) {
 
 					// Do horizontal clipping test (true if passed).
 					//horizontalClippingTest = (x >= 0) && (x < width);
-					
+
 					// Do a z-buffer test.
 					// to skip the shaderFunction if it is not needed.
 					// This is not perfect as we still shade fragments
@@ -462,7 +480,7 @@ function(exports, shader, framebuffer, data) {
 						// // framebuffer.set without z-Test and dirty rectangle adjust.
 // 
 					// }
-					
+
 					// Step interpolation variables on current scanline.
 					// Even failing the z-buffer test we have to perform the interpolation step.
 					// Necessary for z-buffer, shading and texturing.
@@ -471,7 +489,7 @@ function(exports, shader, framebuffer, data) {
 			// End of loop over x for one scanline segment between two intersections.
 			// End of loop over intersections on one scanline.
 		 // End of loop over all scanlines.
-				
+
 		// END exercise Scanline
 	}
 
@@ -584,7 +602,7 @@ function(exports, shader, framebuffer, data) {
 			edgeEndTextureCoord : edgeEndTextureCoord,
 			interpolationWeight : interpolationWeight
 		});
-		
+
 		// Dirty rect has to be adjusted here, as no points are set
 		// in framebuffer when edges are drawn (bresenham) and also not during scanline.
 		// We have to take care the x is not out of range.
