@@ -154,12 +154,10 @@ define(["exports", "scene"], function(exports, scene) {
 	 * On scan-line z-buffer test and dirty rectangle adjust my be skipped.
 	 *
 	 * @parameter color is an object with colorname : rgba values
-	 * @parameter  doZBufferTest is done per default if not given.
+	 * @parameter doZBufferTest is done per default if not given.
 	 * @parameter adjustDirtyRect is done per default if not given.
 	 */
 	function set(x, y, z, color, doZBufferTest, adjustDirtyRect) {
-		
-
 		// Check range could be done in raster.
 		// It is done here to cover (horizontal) clipping artifacts.
 		// There is no range check in Bresenham (used for edges).
