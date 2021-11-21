@@ -147,7 +147,7 @@ define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 			// Distinction of cases for driving variable.
 			if(dXAbs >= dYAbs) {
 				// x is driving variable.
-				var previousY = y;
+				var previousY = y - dYSign;
 				e = dXAbs - dYAbs2;
 				while(x != endX) {
 					x += dXSign;
@@ -156,15 +156,15 @@ define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 					} else {
 						y += dYSign;
 						e += dXdYdiff2;
-
-						if(startY != endY && x != endX){
-							addIntersection(x, y, getZ(x, y), interpolationWeight, edgeStartVertexIndex, edgeEndVertexIndex, edgeStartTextureCoord, edgeEndTextureCoord);
-						}
 					}
 					// Do not add intersections for points on horizontal line
 					// and not the end point, which is done in scanline.
+					if(startY != endY && x != endX && y != previousY && y != startY && y != endY){
+						console.log(`Adding line Intersection (x-line) at ${x}, ${y}, ${getZ(x,y)}`);
+						addIntersection(x, y, getZ(x, y), interpolationWeight, edgeStartVertexIndex, edgeEndVertexIndex, edgeStartTextureCoord, edgeEndTextureCoord);
+					}
 					framebuffer.set(x, y, getZ(x, y), color);
-					previousY += dYSign;
+					previousY = y;
 				}
 			}
 			else {
@@ -182,14 +182,13 @@ define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 					// but not the end point, which is done in scanline.
 					framebuffer.set(x, y, getZ(x, y), color);
 					if(y != endY){
-						// console.log(`Adding line Intersection at ${x}, ${y}, ${getZ(x,y)}`);
+						console.log(`Adding line Intersection (y-line) at ${x}, ${y}, ${getZ(x,y)}`);
 						addIntersection(x, y, getZ(x, y), interpolationWeight, edgeStartVertexIndex, edgeEndVertexIndex, edgeStartTextureCoord, edgeEndTextureCoord);
 						// console.log(`${scanlineIntersection[y].length}th intersection (y-line) at line ${y}`);
 					}
 				}
 			}
 			// END exercise Bresenham
-			console.log(scanlineIntersection);
 		};
 
 		/**
@@ -314,6 +313,7 @@ define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 
 				// If current derivative ==0 then keep the last one.
 				lastDerivative = derivative;
+				console.log(scanlineIntersection);
 			}
 			// END exercise Scanline
 			// END exercise Texture
@@ -477,6 +477,7 @@ define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 					// Do (or skip) some safety check.
 					if ((line.length < 2) || (line.length % 2)) {
 					console.log("Error in number of intersection (" + line.length + ") in line: " + i);
+					continue;
 					}
 					// Order intersection in scanline.
 					line.sort((a, b) => a.x > b.x &&1 || -1);
