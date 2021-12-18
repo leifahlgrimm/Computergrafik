@@ -49,7 +49,7 @@ define(["exports", "shader"], function(exports, shader) {
 				translate : [0, 0, 0],
 				rotate : [0, 0, 0], // around x,y,z axis angle in radiant.
 				scale : [1, 1, 1],
-				shear : [0, 0, 0],
+				shear : [0, 0, 0, 1],
 			},
 			// Modelview matrix as 4x4 glMatrix to
 			// Transform, i.e. translate, rotate, scale the node.
@@ -259,10 +259,18 @@ define(["exports", "shader"], function(exports, shader) {
 			// Include scaling.
 			mat4.scale(this.localModelview, this.transformation.scale);
 
+			// TODO Shear
 			// BEGIN exercise Shear
 			// Include shearing.
 			// Modify the matrix this.localShear (see mat4.translate for matrix data structure).
+			this.localShear[1] = this.transformation.shear[1];
+			this.localShear[2] = this.transformation.shear[2];
+			this.localShear[4] = this.transformation.shear[0];
+			this.localShear[6] = this.transformation.shear[2];
+			this.localShear[8] = this.transformation.shear[0];
+			this.localShear[9] = this.transformation.shear[1];
 
+			mat4.multiply(this.localModelview, this.localShear, this.localModelview);
 			// END exercise Shear
 
 			// Locally we are up to date, but we have to adjust world MV.
@@ -344,8 +352,9 @@ define(["exports", "shader"], function(exports, shader) {
 	 * @parameter setTo sets transform to vec if true, otherwise adds.
 	 */
 	function shear(vec, setTo) {
+		// TODO Shear
 		// BEGIN exercise Shear
-
+		this.transform(this.transformation.shear, vec, setTo);
 		// END exercise Shear
 	}
 
@@ -358,7 +367,7 @@ define(["exports", "shader"], function(exports, shader) {
 	 * @parameter setTo sets transform to vec if true, otherwise adds.
 	 */
 	function transform(trans, vec, setTo, clampLight) {
-		//console.log("transform name: " + name);
+		// console.log("transform name: " + name);
 		this.localModelviewUpToDate = false;
 		this.worldModelviewUpToDate = false;
 		if(setTo == true) {

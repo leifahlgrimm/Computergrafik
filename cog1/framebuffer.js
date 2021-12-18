@@ -127,7 +127,6 @@ define(["exports", "scene"], function(exports, scene) {
 		var indexZBuf = y * width + x;
 
 		// BEGIN exercise Z-Buffer
-		//TODO zBufferTest
 
 		// Z-Buffer pixel starts a frame as undefined.
 		// The first access on a pixel does not need a test.

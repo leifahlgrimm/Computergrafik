@@ -364,10 +364,6 @@ define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 			// To calculate dz.
 			var deltaX = xEndFill - xStartFill;
 
-			//TODO
-			// BEGIN exercise Z-Buffer (for interpolation of z)
-			// But what next?
-
 			// Calculate dz for linear interpolation along a scanline.
 			var dz = (zEndFill - zStartFill) / deltaX;
 
@@ -431,8 +427,6 @@ define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 		 * @parameter texture: if not null do interpolate UV.
 		 */
 		function interpolationStepOnScanline(texture) {
-			//TODO
-			// BEGIN exercise Z-Buffer (for interpolation of z or plane equ)
 
 			// Calculate z for next pixel, i.e. apply dz step.
 
@@ -616,9 +610,6 @@ define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 			if(Math.abs(C) < epsilon) {
 				return false;
 			}
-
-			//TODO
-			// START exercise Z-Buffer
 
 			// Project first vertex (could be any) on normal.
 			// The result is the distance D of polygon plane to origin.
