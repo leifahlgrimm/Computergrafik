@@ -394,15 +394,24 @@ define(["exports", "data", "glMatrix"], function(data, exports) {
 		}
 		
 		// BEGIN exercise Vertex-Normals
-		
-		// Initialize normal array.
+
 		// Loop over polygons.
+		for (var p = 0; p < this.polygonVertices.length; p++) {
+			var currentPolygon = this.polygonVertices[p];
 
 			// Loop over vertices of polygon.
-
+			for (var u = 0; u < currentPolygon.length; u++) {
 				// Accumulate/add all polygon normals.
-
+				if (currentPolygon[u] < this.vertexNormals.length)
+					vec3.add(this.vertexNormals[currentPolygon[u]], this.polygonNormals[p]);
+				else
+					console.log("Error: Invalid index for function calcuateVertexNormalsFromPolygonNormals()", currentPolygon[u]);
+			}
+		}
 		// Normalize normals.
+		for (var n = 0; n < this.vertexNormals.length; n++) {
+			vec3.normalize(this.vertexNormals[n]);
+		}
 
 		// END exercise Vertex-Normals
 	}
@@ -429,25 +438,27 @@ define(["exports", "data", "glMatrix"], function(data, exports) {
 		// BEGIN exercise Vertex-Normals
 
 		// Two edge-vectors dim 3:
+		// Check for polygon vertex exist (common index error in data).
+		if (polygon.length < 3) {
+			return [0, 0, 0];
+		}
 
-				// Check for polygon vertex exist (common index error in data).
+		// Calculate normal vector from vector product of edges.
+		var u = vec3.create(vertices[polygon[0]]);
+		var v = vec3.subtract(vec3.create(vertices[polygon[1]]), u);
+		var w = vec3.subtract(vec3.create(vertices[polygon[2]]), u);
+		n = vec3.cross(v, w, n);
 
-					// We do not use the matrix lib here.
+		if (n[0] == 0 && n[1] == 0 && n[2] == 0) {
+			return [0, 0, 0];
+		}
 
-			// Calculate normal vector from vector product of edges.
-
-			// Check that e[u] are not parallel.
-
-				// Normal exist, otherwise try next edges.
-
-			// Set null-vector (alternative: positive z-direction) as default. 
-
-			// Normalize n, ignoring w.
-			// We do this by hand as the length is already calculated.
+		// Normalize n, ignoring w.
+		return vec3.normalize(n);
 
 		
 		// Only  for template, comment this out for solution.
-		return 1;
+		// return 1;
 
 		// END exercise Vertex-Normals
 		// END exercise Z-Buffer

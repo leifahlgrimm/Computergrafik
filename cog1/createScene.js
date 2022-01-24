@@ -21,8 +21,10 @@ function(exports, scenegraph, animation) {
 
 		// var insideOutPolyNode = scenegraph.createNodeWithModel("insideOutPoly", "insideOutPoly");
 
+		var dirtyTeapotNode = scenegraph.createNodeWithModel("dirtyTeapot", "teapot_dirty", {color:8});
+
 		var cubeNode = scenegraph.createNodeWithModel("cube", "cube", {scale:300});
-		// cubeNode.rotateTo([1.6, -3.87, 0]);
+		cubeNode.rotateTo([1.6, -3.87, 0]);
 
 		// BEGIN exercise myModel
 		// var church = scenegraph.createNodeWithModel("church", "church", {scale:60});
@@ -49,7 +51,7 @@ function(exports, scenegraph, animation) {
 		var torusNode1 = scenegraph.createNodeWithModel("torus 13", "torus", {r2:50,n2:13,color:8});
 
 		var teapotNode = scenegraph.createNodeWithModel("teapot", "teapot", {color:0, scale:40});
-		var dirtyTeapotNode = scenegraph.createNodeWithModel("dirtyTeapot", "teapot_dirty", {color:8});
+
 		//teapotNode.rotate([1,1,1]);
 		
 		var waltheadNode = scenegraph.createNodeWithModel("walthead", "walthead", {color:8});
