@@ -25,8 +25,11 @@ function(exports, scenegraph, animation) {
 		// var teapotNode = scenegraph.createNodeWithModel("teapot", "teapot", {color:0, scale:40});
 		// var dirtyTeapotNode = scenegraph.createNodeWithModel("dirtyTeapot", "teapot_dirty", {color:8});
 
-		var cubeNode = scenegraph.createNodeWithModel("cube", "cube", {scale:300});
-		cubeNode.rotateTo([1.6, -3.87, 0]);
+		// var cubeNode = scenegraph.createNodeWithModel("cube", "cube", {scale:300});
+		// cubeNode.rotateTo([1.6, -3.87, 0]);
+
+		var witcher = scenegraph.createNodeWithModel("witcher", "witcher", {scale: 20});
+		witcher.rotateTo([1.6, 0, 0]);
 
 		// BEGIN exercise myModel
 		// var church = scenegraph.createNodeWithModel("church", "church", {scale:60});

@@ -499,7 +499,7 @@ define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 				if(line){
 					// Do (or skip) some safety check.
 					if ((line.length < 2) || (line.length % 2)) {
-					console.log("Error in number of intersections (" + line.length + ") in line: " + y);
+					// console.log("Error in number of intersections (" + line.length + ") in line: " + y);
 					continue;
 					}
 					// Order intersection in scanline.
