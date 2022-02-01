@@ -17,11 +17,13 @@ function(exports, scenegraph, animation) {
 	 */
 	function init() {
 
+		// var sphere = scenegraph.createNodeWithModel("sphere 1", "sphere", {scale: 80});
 		// var line = scenegraph.createNodeWithModel("line", "line", {scale:200});
 
 		// var insideOutPolyNode = scenegraph.createNodeWithModel("insideOutPoly", "insideOutPoly");
 
-		var dirtyTeapotNode = scenegraph.createNodeWithModel("dirtyTeapot", "teapot_dirty", {color:8});
+		// var teapotNode = scenegraph.createNodeWithModel("teapot", "teapot", {color:0, scale:40});
+		// var dirtyTeapotNode = scenegraph.createNodeWithModel("dirtyTeapot", "teapot_dirty", {color:8});
 
 		var cubeNode = scenegraph.createNodeWithModel("cube", "cube", {scale:300});
 		cubeNode.rotateTo([1.6, -3.87, 0]);
@@ -30,8 +32,7 @@ function(exports, scenegraph, animation) {
 		// var church = scenegraph.createNodeWithModel("church", "church", {scale:60});
 		// church.rotateTo([0.3, -3.87, 0]);
 		// END exercise myModel
-		
-		return;
+
 
 		//var cubeNode = scenegraph.createNodeWithModel("cube", "cube", {scale:100, textureURL:"brickWall.jpg"});		
 		var cubeNode1 = scenegraph.createNodeWithModel("cube 1", "cube", {scale:70, textureURL:"stoneWall.jpg"});
@@ -92,12 +93,10 @@ function(exports, scenegraph, animation) {
         cubeNode4.setVisible(false);
         cubeNode5.setVisible(false);
         cubeNode6.setVisible(false);
-        insideOutPolyNode.setVisible(false);
         diamondNode.setVisible(false);
         torusNode.setVisible(false);
         torusNode1.setVisible(false);
         teapotNode.setVisible(false);
-        dirtyTeapotNode.setVisible(false);
         waltheadNode.setVisible(false);
         plainNode1.setVisible(false);
         emptyNode1.setVisible(false);

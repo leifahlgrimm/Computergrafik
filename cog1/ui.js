@@ -86,8 +86,8 @@ function ui(exports, app, layout, scene, scenegraph, animation, shader, dojo, sn
 
 		// BEGIN exercise Shading       
        	// Comment this in. 
-        //initShaderControls();
-        //initLightControls();
+        initShaderControls();
+        initLightControls();
 		// END exercise Shading        
         
         initScenegraphButtons();

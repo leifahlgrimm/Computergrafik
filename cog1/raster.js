@@ -543,7 +543,7 @@ define(["exports", "shader", "framebuffer", "data", "glMatrix"], //
 								// if(texture != null) {
 								// texture.sample(interpolationData.uvVec, color);
 								// }
-								// shadingFunction(color, interpolationData.weightOnScanline);
+								shadingFunction(color, interpolationData.weightOnScanline);
 								//
 								// // framebuffer.set without z-Test and dirty rectangle adjust.
 								//

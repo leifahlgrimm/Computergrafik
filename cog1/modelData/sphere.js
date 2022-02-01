@@ -32,6 +32,27 @@
 define(["exports", "data", "glMatrix"], function(exports, data) {
 	"use strict";
 
+	const init_vertices = [
+		[1.0, 0.0, 0.0], 	// 0
+		[-1.0, 0.0, 0.0], 	// 1
+		[0.0, 1.0, 0.0], 	// 2
+		[0.0, -1.0, 0.0], 	// 3
+		[0.0, 0.0, 1.0], 	// 4
+		[0.0, 0.0, -1.0] 	// 5
+	];
+
+	const init_polygon = [
+		[0, 4, 2],
+		[2, 4, 1],
+		[1, 4, 3],
+		[3, 4, 0],
+		[0, 2, 5],
+		[2, 1, 5],
+		[1, 3, 5],
+		[3, 0, 5]
+	];
+
+
 	/**
 	 * Procedural calculation.
 	 *
@@ -66,16 +87,10 @@ define(["exports", "data", "glMatrix"], function(exports, data) {
 		var instance = {};
 
 		// BEGIN exercise Sphere
-
-		// Starting with octahedron vertices
-
-		// octahedron triangles
-
+		instance.vertices = [...init_vertices];
+		instance.polygonVertices = [...init_polygon];
 		devide_all.call(instance, recursionDepth);
-
 		// END exercise Sphere
-		
-		devide_all.call(instance, recursionDepth);
 
 		generateTextureCoordinates.call(instance);
 
@@ -128,7 +143,7 @@ define(["exports", "data", "glMatrix"], function(exports, data) {
 				
 
 		// Problem with phi/u: phi=360 and phi=0 are the same point in 3D and also on a tiled texture.
-		// But for faces it is a difference if uv-range is 350¡-360¡ [.9-1]or 350¡-0¡ [.9-0].
+		// But for faces it is a difference if uv-range is 350ï¿½-360ï¿½ [.9-1]or 350ï¿½-0ï¿½ [.9-0].
 		// Thus, insert a check/hack (assuming faces cover only a small part of the texture):
 
 			// Check if u-range should be low or high (left or right in texture),
@@ -150,8 +165,11 @@ define(["exports", "data", "glMatrix"], function(exports, data) {
 			nbRecusions = 0;
 		}
 		// Stop criterion.
+		if(nbRecusions == recursionDepth) {
+			return;
+		}
+		console.log("nbRecusions: "+nbRecusions);
 
-		//console.log("nbRecusions: "+nbRecusions);
 		// Assemble divided polygons in an new array.
 
 			// Indices of the last three new vertices.
