@@ -18,35 +18,8 @@ function(exports, scenegraph, animation) {
 	function init() {
 		// BEGIN exercise Scenegraph
 
-		// Set parent-child relationships for scene-graph nodes.
-		var shoulder = scenegraph.createNodeWithModel("oberarm", "sphere", {recurstionDepth: 2, scale:80});
 
-
-		var upperArm = scenegraph.createNodeWithModel("oberarm", "cube", {scale:50}, shoulder);
-		upperArm.scale([3, 0.05, 0.05]);
-		upperArm.translate([96, -248, 0]);
-		upperArm.rotate([0, 0, -1.2]);
-
-		var elbow = scenegraph.createNodeWithModel("ellenbogen", "sphere", {recurstionDepth: 2, scale:60}, shoulder);
-		elbow.translate([180, -464, 0]);
-
-		var lowerArm = scenegraph.createNodeWithModel("unterarm", "cube", {scale:35}, elbow);
-		lowerArm.scale([5, 0, 0]);
-		lowerArm.translate([246, -4, 0]);
-
-		var wrist = scenegraph.createNodeWithModel("handgelenk", "sphere", {recurstionDepth: 2, scale:40}, elbow);
-		wrist.translate([474, -4, 0]);
-		wrist.rotate([0.8, 0.3, 0]);
-
-		var hand = scenegraph.createNodeWithModel("hand", "cube", {scale:40}, wrist);
-		hand.scale([0.7, 1.4, -0.7]);
-		hand.translate([110, 0, 0]);
-		hand.rotate([0, 0, -1.57]);
-
-		// END exercise Scenegraph
-
-
-		// var sphere = scenegraph.createNodeWithModel("sphere 1", "sphere", {scale: 80});
+		var sphere = scenegraph.createNodeWithModel("sphere 1", "sphere", {recursionDepth: 3, scale: 300});
 		// var line = scenegraph.createNodeWithModel("line", "line", {scale:200});
 
 		// var insideOutPolyNode = scenegraph.createNodeWithModel("insideOutPoly", "insideOutPoly");
