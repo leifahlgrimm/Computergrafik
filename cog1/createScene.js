@@ -16,6 +16,35 @@ function(exports, scenegraph, animation) {
 	 *
 	 */
 	function init() {
+		// BEGIN exercise Scenegraph
+
+		// Set parent-child relationships for scene-graph nodes.
+		var shoulder = scenegraph.createNodeWithModel("oberarm", "sphere", {recurstionDepth: 2, scale:80});
+
+
+		var upperArm = scenegraph.createNodeWithModel("oberarm", "cube", {scale:50}, shoulder);
+		upperArm.scale([3, 0.05, 0.05]);
+		upperArm.translate([96, -248, 0]);
+		upperArm.rotate([0, 0, -1.2]);
+
+		var elbow = scenegraph.createNodeWithModel("ellenbogen", "sphere", {recurstionDepth: 2, scale:60}, shoulder);
+		elbow.translate([180, -464, 0]);
+
+		var lowerArm = scenegraph.createNodeWithModel("unterarm", "cube", {scale:35}, elbow);
+		lowerArm.scale([5, 0, 0]);
+		lowerArm.translate([246, -4, 0]);
+
+		var wrist = scenegraph.createNodeWithModel("handgelenk", "sphere", {recurstionDepth: 2, scale:40}, elbow);
+		wrist.translate([474, -4, 0]);
+		wrist.rotate([0.8, 0.3, 0]);
+
+		var hand = scenegraph.createNodeWithModel("hand", "cube", {scale:40}, wrist);
+		hand.scale([0.7, 1.4, -0.7]);
+		hand.translate([110, 0, 0]);
+		hand.rotate([0, 0, -1.57]);
+
+		// END exercise Scenegraph
+
 
 		// var sphere = scenegraph.createNodeWithModel("sphere 1", "sphere", {scale: 80});
 		// var line = scenegraph.createNodeWithModel("line", "line", {scale:200});
@@ -28,8 +57,8 @@ function(exports, scenegraph, animation) {
 		// var cubeNode = scenegraph.createNodeWithModel("cube", "cube", {scale:300});
 		// cubeNode.rotateTo([1.6, -3.87, 0]);
 
-		var witcher = scenegraph.createNodeWithModel("witcher", "witcher", {scale: 20});
-		witcher.rotateTo([1.6, 0, 0]);
+		// var witcher = scenegraph.createNodeWithModel("witcher", "witcher", {scale: 20});
+		// witcher.rotateTo([1.6, 0, 0]);
 
 		// BEGIN exercise myModel
 		// var church = scenegraph.createNodeWithModel("church", "church", {scale:60});
@@ -38,38 +67,31 @@ function(exports, scenegraph, animation) {
 
 
 		//var cubeNode = scenegraph.createNodeWithModel("cube", "cube", {scale:100, textureURL:"brickWall.jpg"});		
-		var cubeNode1 = scenegraph.createNodeWithModel("cube 1", "cube", {scale:70, textureURL:"stoneWall.jpg"});
-		cubeNode1.translate([50,200,0]);
+		// var cubeNode1 = scenegraph.createNodeWithModel("cube 1", "cube", {scale:70, textureURL:"stoneWall.jpg"});
+		// cubeNode1.translate([50,200,0]);
 		//cubeNode1.rotate([1,1,1]);
-		var cubeNode2 = scenegraph.createNodeWithModel("cube 2", "cube", {scale:50, textureURL:"uvTest.jpg"});
-		cubeNode2.translate([-100,-400,0]);
+		//var cubeNode2 = scenegraph.createNodeWithModel("cube 2", "cube", {scale:50, textureURL:"uvTest.jpg"});
+		//cubeNode2.translate([-100,-400,0]);
 		//cubeNode2.rotate([-1,-1,-1]);
-		var cubeNode3 = scenegraph.createNodeWithModel("cube procedural texture", "cube", {scale:50, textureURL:"sampleProceduralRGB"});
-		var cubeNode4 = scenegraph.createNodeWithModel("cube six faces texture", "cube", {scale:200, textureURL:"OrbitCube.gif", sixFacesTexture:true});
-		var cubeNode5 = scenegraph.createNodeWithModel("cube 3x3 texture", "cube", {scale:50, textureURL:"cubeColor.png", sixFacesTexture:true});
-		var cubeNode6 = scenegraph.createNodeWithModel("cube Escher texture", "cube", {scale:200, textureURL:"EscherCubeFish.gif", sixFacesTexture:true});
+		//var cubeNode3 = scenegraph.createNodeWithModel("cube procedural texture", "cube", {scale:50, textureURL:"sampleProceduralRGB"});
+		//var cubeNode4 = scenegraph.createNodeWithModel("cube six faces texture", "cube", {scale:200, textureURL:"OrbitCube.gif", sixFacesTexture:true});
+		//var cubeNode5 = scenegraph.createNodeWithModel("cube 3x3 texture", "cube", {scale:50, textureURL:"cubeColor.png", sixFacesTexture:true});
+		//var cubeNode6 = scenegraph.createNodeWithModel("cube Escher texture", "cube", {scale:200, textureURL:"EscherCubeFish.gif", sixFacesTexture:true});
 
-		var diamondNode = scenegraph.createNodeWithModel("diamond", "diamond");
+		//var diamondNode = scenegraph.createNodeWithModel("diamond", "diamond");
 
-		var torusNode = scenegraph.createNodeWithModel("torus", "torus");
-		var torusNode1 = scenegraph.createNodeWithModel("torus 13", "torus", {r2:50,n2:13,color:8});
+		//var torusNode = scenegraph.createNodeWithModel("torus", "torus");
+		//var torusNode1 = scenegraph.createNodeWithModel("torus 13", "torus", {r2:50,n2:13,color:8});
 
-		var teapotNode = scenegraph.createNodeWithModel("teapot", "teapot", {color:0, scale:40});
+		//var teapotNode = scenegraph.createNodeWithModel("teapot", "teapot", {color:0, scale:40});
 
 		//teapotNode.rotate([1,1,1]);
 		
-		var waltheadNode = scenegraph.createNodeWithModel("walthead", "walthead", {color:8});
+		//var waltheadNode = scenegraph.createNodeWithModel("walthead", "walthead", {color:8});
 		
-		var plainNode1 = scenegraph.createNodeWithModel("plain", "plain", {scale:200, color:9, textureURL:"land_ocean_ice_2048.jpg"});		
+		//var plainNode1 = scenegraph.createNodeWithModel("plain", "plain", {scale:200, color:9, textureURL:"land_ocean_ice_2048.jpg"});
 
-		var emptyNode1 = scenegraph.createNodeWithModel("empty", "empty");		
-
-
-        // BEGIN exercise Scenegraph		
-		
-		// Set parent-child relationships for scene-graph nodes.
-
-        // END exercise Scenegraph		
+		//var emptyNode1 = scenegraph.createNodeWithModel("empty", "empty");
         
         // Assign animations.
         // animation.assign(cubeNode, "move");
@@ -90,7 +112,7 @@ function(exports, scenegraph, animation) {
 		// Set visibility of nodes (hide: set to false).
 		// Comment out what you want to see as the default is visible.
         // cubeNode.setVisible(false);
-        cubeNode1.setVisible(false);
+        /*cubeNode1.setVisible(false);
         cubeNode2.setVisible(false);
         cubeNode3.setVisible(false);
         cubeNode4.setVisible(false);
@@ -102,7 +124,7 @@ function(exports, scenegraph, animation) {
         teapotNode.setVisible(false);
         waltheadNode.setVisible(false);
         plainNode1.setVisible(false);
-        emptyNode1.setVisible(false);
+        emptyNode1.setVisible(false);*/
 
         
 		// Set the initially interactive node [by name].
